@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blue Insights — FY26 Revenue</title>
+<link rel="stylesheet" href="_ds/blue-insights-design-system-2bb2cddb-564a-493e-8158-f3abd72f980c/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/blue-insights-design-system-2bb2cddb-564a-493e-8158-f3abd72f980c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/blue-insights-design-system-2bb2cddb-564a-493e-8158-f3abd72f980c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/blue-insights-design-system-2bb2cddb-564a-493e-8158-f3abd72f980c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/blue-insights-design-system-2bb2cddb-564a-493e-8158-f3abd72f980c/styles.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;background:var(--color-canvas);color:var(--color-text-primary);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--color-primary);text-decoration:none}a:hover{color:var(--color-primary-hover);text-decoration:underline}
+button{font-family:var(--font-sans)}
+::selection{background:var(--color-primary-soft)}
+:where(a,button,input,textarea,[tabindex]):focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+.scroll-quiet{scrollbar-width:thin;scrollbar-color:transparent transparent}
+.scroll-quiet:hover{scrollbar-color:var(--color-border) transparent}
+.scroll-quiet::-webkit-scrollbar{width:8px}
+.scroll-quiet::-webkit-scrollbar-thumb{background:transparent;border-radius:8px}
+.scroll-quiet:hover::-webkit-scrollbar-thumb{background:var(--color-border)}
+.hover-tint-subtle:hover{background:var(--color-surface-2)}
+.shimmer{background:linear-gradient(90deg,var(--color-surface-2) 25%,var(--color-border) 37%,var(--color-surface-2) 63%);background-size:200% 100%}
+.rise,.swap-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:no-preference){
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.shimmer{animation:shimmer 1.4s ease infinite}
+@keyframes riseIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.rise{animation:riseIn .25s var(--ease-standard) both}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.35}}
+.pulse-dot{animation:pulseDot 1s ease infinite}
+@keyframes swapIn{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
+.swap-in{animation:swapIn var(--duration-normal) var(--ease-standard) both}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="_ds/blue-insights-design-system-2bb2cddb-564a-493e-8158-f3abd72f980c/_ds_bundle.js"></script>
+<script type="text/babel" src="fy26-data.jsx"></script>
+<script type="text/babel" src="fy26-sidekick.jsx"></script>
+<script type="text/babel" src="fy26-app.jsx"></script>
+</body>
+</html>

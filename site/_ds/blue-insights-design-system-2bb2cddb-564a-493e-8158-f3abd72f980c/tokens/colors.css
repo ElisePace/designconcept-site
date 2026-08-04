@@ -1,0 +1,108 @@
+/* Blue Insights colour tokens.
+   Light mode is the default and lives on :root. Dark mode is a designed theme,
+   not an inversion — activated with [data-theme="dark"] on any ancestor.
+   Pair every status colour with an icon/label, never colour alone. */
+
+:root {
+  /* ---- Neutrals (light) ---- */
+  --color-canvas: #FFFFFF;      /* Background / page canvas */
+  --color-surface-1: #F8FAFC;   /* Cards, panels */
+  --color-surface-2: #F1F5F9;   /* Panel headers, subtle fills */
+  --color-border: #E2E8F0;      /* Borders / dividers */
+
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+
+  /* ---- Brand & accent ---- */
+  --color-primary: #034BDC;         /* Neural Blue — the single dominant signal */
+  --color-primary-hover: #0340BE;   /* Pressed / hover darkening */
+  --color-primary-soft: #EFF4FE;    /* Tinted primary background */
+  --color-secondary: #0284C7;       /* Secondary accent */
+  --color-secondary-alt: #38BDF8;   /* Secondary accent, brighter */
+
+  /* ---- Semantic status ---- */
+  --color-success: #16A34A;
+  --color-success-bg: #DCFCE7;
+  --color-success-fg: #166534;
+  --color-warning: #D97706;
+  --color-warning-bg: #FEF3C7;
+  --color-warning-fg: #92400E;
+  --color-error: #DC2626;
+  --color-error-bg: #FEE2E2;
+  --color-error-fg: #991B1B;
+  --color-info: #0284C7;
+  --color-info-bg: #E0F2FE;
+  --color-info-fg: #075985;
+
+  /* ---- AI semantics · trust & interpretability ---- */
+  --color-ai-accountability: #1D4ED8;   /* Accountability blue — audit trail */
+  --color-ai-consent: #C6F1D6;          /* Consent mint — opt-in */
+  --color-ai-transparency: #F8F4E3;     /* Transparency beige — "how this was made" */
+  --color-ai-privacy: #DADADA;          /* Privacy gray — contains PII */
+  --color-ai-bias: #F25C54;             /* Bias monitor red — fairness flag */
+  --color-ai-risk: #FFD93D;             /* Risk alert yellow — review recommended */
+
+  /* ---- Chart data ramp (blue tints seen in the revenue chart) ---- */
+  --color-chart-bar: #C7D6F5;           /* Resting bar */
+  --color-chart-bar-active: #034BDC;    /* Highlighted / selected bar */
+  --color-chart-bar-muted: #E7ECF4;     /* De-emphasised (future) bar */
+
+  /* ---- Focus ring ---- */
+  --color-focus-ring: rgba(3, 75, 220, 0.35);
+
+  /* ---- Aliases used across components ---- */
+  --surface-card: var(--color-surface-1);
+  --surface-panel-head: var(--color-surface-2);
+  --text-body: var(--color-text-secondary);
+  --text-heading: var(--color-text-primary);
+  --border-default: var(--color-border);
+}
+
+[data-theme="dark"] {
+  /* ---- Neutrals (dark) — layered surfaces reduce glare ---- */
+  --color-canvas: #0F172A;
+  --color-surface-1: #1E293B;
+  --color-surface-2: #334155;
+  --color-border: #475569;
+
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+
+  /* ---- Brand & accent (lightened to hold contrast on dark) ---- */
+  --color-primary: #60A5FA;
+  --color-primary-hover: #7DB5FB;
+  --color-primary-soft: rgba(96, 165, 250, 0.14);
+  --color-secondary: #38BDF8;
+  --color-secondary-alt: #38BDF8;
+
+  /* ---- Semantic status (dark) ---- */
+  --color-success: #4ADE80;
+  --color-success-bg: rgba(74, 222, 128, 0.15);
+  --color-success-fg: #4ADE80;
+  --color-warning: #FBBF24;
+  --color-warning-bg: rgba(251, 191, 36, 0.15);
+  --color-warning-fg: #FBBF24;
+  --color-error: #F87171;
+  --color-error-bg: rgba(248, 113, 113, 0.15);
+  --color-error-fg: #F87171;
+  --color-info: #38BDF8;
+  --color-info-bg: rgba(56, 189, 248, 0.15);
+  --color-info-fg: #38BDF8;
+
+  /* ---- AI semantics (dark) ---- */
+  --color-ai-accountability: #60A5FA;
+  --color-ai-consent: #86EFAC;
+  --color-ai-transparency: #F5F5F4;
+  --color-ai-privacy: #9CA3AF;
+  --color-ai-bias: #F87171;
+  --color-ai-risk: #FBBF24;
+
+  /* ---- Chart data ramp (dark) ---- */
+  --color-chart-bar: #C7D0E0;
+  --color-chart-bar-active: #60A5FA;
+  --color-chart-bar-muted: rgba(148, 163, 184, 0.18);
+
+  --color-focus-ring: rgba(96, 165, 250, 0.4);
+}

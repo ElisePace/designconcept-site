@@ -1,0 +1,35 @@
+/* Blue Insights typography tokens.
+   One family — Source Sans 3. Hierarchy comes from weight and size, not a second
+   family. Tabular numerals for every metric, table and KPI so columns align. */
+
+:root {
+  --font-sans: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Data / numeric styling — apply --font-tabular-features to any figures */
+  --font-tabular-features: 'tnum' 1, 'lnum' 1;
+
+  /* Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Type scale (px) — from the brand specimen */
+  --font-size-display: 32px;   /* Display / H1 · Semibold */
+  --font-size-h2: 24px;        /* H2 · Semibold */
+  --font-size-h3: 20px;        /* H3 · Semibold */
+  --font-size-body-lg: 16px;   /* Body large · Regular */
+  --font-size-body: 14px;      /* Body default · Regular */
+  --font-size-data: 13px;      /* Data / table · Regular · tabular */
+  --font-size-caption: 12px;   /* Caption / label · Medium */
+  --font-size-eyebrow: 11px;   /* Eyebrow / uppercase label · Semibold */
+
+  /* Line heights */
+  --line-height-tight: 1.15;   /* Display headings */
+  --line-height-snug: 1.3;
+  --line-height-normal: 1.5;   /* Body & dense content (1.4–1.6) */
+
+  /* Letter spacing */
+  --letter-spacing-display: -0.01em;
+  --letter-spacing-eyebrow: 0.14em;  /* Uppercase eyebrows */
+  --letter-spacing-label: 0.06em;    /* Uppercase small labels */
+}
