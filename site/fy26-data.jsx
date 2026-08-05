@@ -48,7 +48,7 @@ const SOURCES = [
 const WHY = {
   1: 'Compared recognised renewal revenue for the EMEA enterprise segment in Q3 against Q2 in the warehouse rollup; the −28% is the raw QoQ delta.',
   2: 'Counted accounts in the renewals tracker whose renewal quarter moved from Q3 to Q4. In-negotiation deals were included in that count.',
-  3: 'Checked new-business bookings in the finance commentary — flat QoQ — which rules out demand as the driver and points to renewal timing.',
+  3: 'Checked new-business bookings in the finance commentary — flat QoQ — which points away from demand as the driver and toward renewal timing.',
 };
 
 const PIPELINE = [

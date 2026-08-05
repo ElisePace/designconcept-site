@@ -55,6 +55,10 @@ function App() {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   }, [dark]);
 
+  useE(() => {
+    if (open) document.getElementById('sidekick-heading')?.focus();
+  }, [open]);
+
   const clearTimers = () => { timers.current.forEach((t) => window.clearTimeout(t)); timers.current = []; };
   useE(() => () => clearTimers(), []);
 

@@ -44,7 +44,7 @@
   --color-ai-risk: #FFD93D;             /* Risk alert yellow — review recommended */
 
   /* ---- Chart data ramp (blue tints seen in the revenue chart) ---- */
-  --color-chart-bar: #C7D6F5;           /* Resting bar */
+  --color-chart-bar: #6C8DDA;           /* Resting bar — ≥3:1 against card/canvas (WCAG 1.4.11) */
   --color-chart-bar-active: #034BDC;    /* Highlighted / selected bar */
   --color-chart-bar-muted: #E7ECF4;     /* De-emphasised (future) bar */
 

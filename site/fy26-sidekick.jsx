@@ -14,6 +14,15 @@ const IconLock = (p) => <Icon {...p}><rect x="4" y="11" width="16" height="9" rx
 const EYEBROW = { fontSize: 11, fontWeight: 'var(--font-weight-semibold)', letterSpacing: 'var(--letter-spacing-label)', textTransform: 'uppercase', color: 'var(--color-text-muted)' };
 const TNUM = { fontFeatureSettings: "'tnum' 1, 'lnum' 1" };
 
+function useMockNote() {
+  const [shown, setShown] = useState(false);
+  const flash = () => { setShown(true); window.setTimeout(() => setShown(false), 2600); };
+  const note = shown ? (
+    <p className="rise" role="status" style={{ margin: '6px 0 0', fontSize: 12, color: 'var(--color-text-muted)' }}>Not wired in this concept — mocked for the demo.</p>
+  ) : null;
+  return [note, flash];
+}
+
 function UpdatedBadge() {
   return <Badge tone="primary" uppercase style={{ gap: 4 }}><IconRefresh size={10} sw={3} />Updated</Badge>;
 }
@@ -26,7 +35,7 @@ function SidekickHeader({ onClose, canShare, onShare }) {
           <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: 'var(--radius-pill)', background: 'var(--color-primary)' }}></span>
         </span>
         <div>
-          <div style={{ fontSize: 14, fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', lineHeight: 1.2 }}>Research sidekick</div>
+          <div id="sidekick-heading" tabIndex={-1} style={{ fontSize: 14, fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-text-primary)', lineHeight: 1.2, outline: 'none' }}>Research sidekick</div>
           <div style={{ fontSize: 12, color: 'var(--color-text-muted)', lineHeight: 1.3 }}>Show your working</div>
         </div>
       </div>
@@ -79,7 +88,7 @@ function Working({ step, sourceCount, correcting }) {
           Re-checking with your correction…
         </div>
       )}
-      <ProgressBar value={pct} height={4} style={{ marginBottom: 20 }} />
+      <ProgressBar value={pct} height={4} style={{ marginBottom: 20 }} aria-label="Research pipeline progress" />
       <StepList steps={steps} style={{ gap: 16 }} />
       {step === PIPELINE.length - 1 && <div className="shimmer" style={{ height: 14, width: 96, borderRadius: 'var(--radius-sm)', marginTop: 16, marginLeft: 32 }}></div>}
     </div>
@@ -91,6 +100,7 @@ function SourceDrawer({ source, onBack }) {
   const shownRef = useRef(source);
   if (source) shownRef.current = source;
   const s = shownRef.current;
+  const [openNote, flashOpenNote] = useMockNote();
   return (
     <div aria-hidden={!open} inert={open ? undefined : ''} style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', background: 'var(--color-canvas)', transform: open ? 'translateX(0)' : 'translateX(100%)', transition: 'transform 250ms var(--ease-standard)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, height: 60, padding: '0 12px', borderBottom: '1px solid var(--color-border)', flexShrink: 0 }}>
@@ -117,7 +127,8 @@ function SourceDrawer({ source, onBack }) {
               </div>
             ))}
           </div>
-          <Button fullWidth style={{ marginTop: 16 }} trailingIcon={<Icon size={14}><path d="M7 17L17 7M9 7h8v8"></path></Icon>}>Open source</Button>
+          <Button fullWidth style={{ marginTop: 16 }} onClick={flashOpenNote} trailingIcon={<Icon size={14}><path d="M7 17L17 7M9 7h8v8"></path></Icon>}>Open source</Button>
+          {openNote}
         </div>
       )}
     </div>
@@ -144,7 +155,7 @@ function RestrictedRow() {
       <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, flexShrink: 0, borderRadius: 'var(--radius-sm)', background: 'var(--color-error-bg)', color: 'var(--color-error)' }}><IconLock size={13} sw={2.2} /></span>
       <div style={{ minWidth: 0, flex: 1 }}>
         <div style={{ fontSize: 12.5, fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-secondary)' }}>Salesforce — EMEA opportunities</div>
-        <div style={{ ...EYEBROW, color: 'var(--color-error)' }}>Restricted</div>
+        <div style={{ ...EYEBROW, color: 'var(--color-error-fg)' }}>Restricted</div>
       </div>
       {requested ? (
         <span className="rise" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, flexShrink: 0, fontSize: 11.5, fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-primary)' }}><IconCheck size={13} sw={2.6} />Access requested</span>
@@ -189,10 +200,15 @@ function Answer({ quarter, corrected, summary, renewalDrop, pushed, activeCite, 
   const toggle = (k) => setOpenBlocks((o) => ({ ...o, [k]: !o[k] }));
   const submit = () => { setShowForm(false); onCorrect(); };
   const strong = { fontWeight: 'var(--font-weight-semibold)', ...TNUM };
+  const [checkNote, flashCheckNote] = useMockNote();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       {corrected && <Alert tone="info" showIcon={false} className="rise" style={{ alignItems: 'center', gap: 8, background: 'var(--color-primary-soft)', border: '1px solid transparent', color: 'var(--color-primary)', fontWeight: 'var(--font-weight-medium)' }}><span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}><IconRefresh size={14} sw={2.2} />Re-ran with your correction — figures updated.</span></Alert>}
+
+      {quarter !== 'Q3' && (
+        <Alert tone="info" showIcon={false} className="rise" style={{ fontSize: 12.5 }}>Viewing {quarter} FY26 — the chart and its annotation still show the Q3 event.</Alert>
+      )}
 
       <div className="rise">
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
@@ -241,13 +257,16 @@ function Answer({ quarter, corrected, summary, renewalDrop, pushed, activeCite, 
         <div style={{ marginTop: 10 }}><RestrictedRow /></div>
       </FindingSection>
 
-      <button className="rise hover-tint-subtle" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, textAlign: 'left', padding: '12px 14px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', background: 'transparent', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>
-        <span>
-          <span style={{ ...EYEBROW, color: 'var(--color-primary)' }}>Suggested next check</span>
-          <span style={{ display: 'block', marginTop: 3, fontSize: 13.5, fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-primary)' }}>Compare EMEA renewal cohort to APAC</span>
-        </span>
-        <span style={{ flexShrink: 0, padding: '6px 12px', borderRadius: 'var(--radius-md)', background: 'var(--color-primary)', color: '#fff', fontSize: 12.5, fontWeight: 'var(--font-weight-semibold)' }}>Run check</span>
-      </button>
+      <div className="rise">
+        <button className="hover-tint-subtle" onClick={flashCheckNote} style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-between', gap: 12, textAlign: 'left', padding: '12px 14px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', background: 'transparent', cursor: 'pointer', fontFamily: 'var(--font-sans)' }}>
+          <span>
+            <span style={{ ...EYEBROW, color: 'var(--color-primary)' }}>Suggested next check</span>
+            <span style={{ display: 'block', marginTop: 3, fontSize: 13.5, fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-primary)' }}>Compare EMEA renewal cohort to APAC</span>
+          </span>
+          <span style={{ flexShrink: 0, padding: '6px 12px', borderRadius: 'var(--radius-md)', background: 'var(--color-primary)', color: '#fff', fontSize: 12.5, fontWeight: 'var(--font-weight-semibold)' }}>Run check</span>
+        </button>
+        {checkNote}
+      </div>
 
       <div className="rise" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <Button variant={saved ? 'outlinePrimary' : 'secondary'} size="sm" fullWidth disabled={saved} onClick={() => setSaved(true)} leadingIcon={saved ? <IconCheck size={14} sw={2.4} /> : <Icon size={14}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></Icon>} style={{ opacity: 1, color: 'var(--color-primary)', background: saved ? 'var(--color-primary-soft)' : undefined }}>{saved ? 'Saved as repeatable check' : 'Save as repeatable check'}</Button>
@@ -275,7 +294,7 @@ function Answer({ quarter, corrected, summary, renewalDrop, pushed, activeCite, 
 
       <div className="rise" style={{ paddingTop: 14, borderTop: '1px solid var(--color-border)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-          <Badge tone={corrected ? 'primary' : 'warning'} dot>{corrected ? 'High confidence' : 'Medium confidence'}</Badge>
+          <Badge tone={corrected ? 'primary' : 'warning'} dot>{corrected ? 'Medium-high · assumption resolved' : 'Medium confidence'}</Badge>
           <span style={{ ...TNUM, fontSize: 12, color: 'var(--color-text-muted)', textAlign: 'right' }}>Based on 3 sources you can access · 1 restricted</span>
         </div>
         <TrustMeter corrected={corrected} />
@@ -326,7 +345,7 @@ function ShareModal({ summary, onClose, onShared }) {
   const figures = Array.from(new Set(text.match(FIGURE_RE) || []));
   const share = () => { if (!reviewed) return; if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {}); onShared(); };
   return (
-    <Modal open title="Review before sharing" subtitle="Nothing is exported until you confirm." width={520} onClose={onClose}
+    <Modal open title="Review before sharing" subtitle="Nothing is exported until you confirm." width={520} onClose={onClose} aria-label="Review before sharing"
       footer={<><Button variant="ghost" onClick={onClose}>Cancel</Button><Button disabled={!reviewed} onClick={share} leadingIcon={<Icon size={14}><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></Icon>}>Copy / share</Button></>}>
       <label style={EYEBROW}>Summary to share — edit as needed</label>
       <Textarea value={text} rows={4} onChange={(e) => setText(e.target.value)} style={{ ...TNUM, marginTop: 6, resize: 'none' }} />

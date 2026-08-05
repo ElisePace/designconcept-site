@@ -120,6 +120,7 @@ function FindingSection({
   ...rest
 }) {
   const dot = TONES[tone] || TONES.evidence;
+  const regionId = typeof label === 'string' ? `finding-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}` : undefined;
   return /*#__PURE__*/React.createElement("div", _extends({
     style: {
       border: '1px solid var(--color-border)',
@@ -131,6 +132,7 @@ function FindingSection({
   }, rest), /*#__PURE__*/React.createElement("button", {
     onClick: onToggle,
     "aria-expanded": open,
+    "aria-controls": regionId,
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -185,6 +187,7 @@ function FindingSection({
   }, /*#__PURE__*/React.createElement("polyline", {
     points: "6 9 12 15 18 9"
   })))), open ? /*#__PURE__*/React.createElement("div", {
+    id: regionId,
     style: {
       padding: '0 16px 15px',
       fontFamily: 'var(--font-sans)',
