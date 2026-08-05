@@ -92,7 +92,7 @@ function SourceDrawer({ source, onBack }) {
   if (source) shownRef.current = source;
   const s = shownRef.current;
   return (
-    <div aria-hidden={!open} style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', background: 'var(--color-canvas)', transform: open ? 'translateX(0)' : 'translateX(100%)', transition: 'transform 250ms var(--ease-standard)' }}>
+    <div aria-hidden={!open} inert={open ? undefined : ''} style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', background: 'var(--color-canvas)', transform: open ? 'translateX(0)' : 'translateX(100%)', transition: 'transform 250ms var(--ease-standard)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, height: 60, padding: '0 12px', borderBottom: '1px solid var(--color-border)', flexShrink: 0 }}>
         <Button variant="ghost" size="sm" onClick={onBack} leadingIcon={<Icon size={16}><path d="M15 18l-6-6 6-6"></path></Icon>} style={{ color: 'var(--color-primary)' }}>Back to answer</Button>
         <span style={{ ...EYEBROW, marginLeft: 'auto' }}>Source preview</span>
@@ -305,6 +305,24 @@ const FIGURE_RE = /(\$[\d.]+M|[−-]?\d+(?:\.\d+)?%)/g;
 function ShareModal({ summary, onClose, onShared }) {
   const [text, setText] = useState(summary);
   const [reviewed, setReviewed] = useState(false);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
+  useEffect(() => {
+    const prev = document.activeElement;
+    const dialog = document.querySelector('[role="dialog"]');
+    dialog?.querySelector('textarea')?.focus();
+    const onKey = (e) => {
+      if (e.key === 'Escape') { e.stopPropagation(); closeRef.current(); return; }
+      if (e.key !== 'Tab' || !dialog) return;
+      const items = dialog.querySelectorAll('button:not([disabled]), [href], input, textarea, [tabindex]:not([tabindex="-1"])');
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('keydown', onKey); if (prev && prev.focus) prev.focus(); };
+  }, []);
   const figures = Array.from(new Set(text.match(FIGURE_RE) || []));
   const share = () => { if (!reviewed) return; if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {}); onShared(); };
   return (
@@ -315,7 +333,7 @@ function ShareModal({ summary, onClose, onShared }) {
       {figures.length > 0 && (
         <Alert tone="warning" title={`Review before sharing — ${figures.length} sensitive figure${figures.length > 1 ? 's' : ''}`} style={{ marginTop: 14 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 6 }}>
-            {figures.map((f) => <span key={f} style={{ ...TNUM, padding: '2px 8px', borderRadius: 'var(--radius-pill)', background: 'var(--color-warning)', color: '#fff', fontSize: 11.5, fontWeight: 'var(--font-weight-semibold)' }}>{f}</span>)}
+            {figures.map((f) => <span key={f} style={{ ...TNUM, padding: '2px 8px', borderRadius: 'var(--radius-pill)', background: 'var(--color-warning-bg)', border: '1px solid var(--color-warning)', color: 'var(--color-warning-fg)', fontSize: 11.5, fontWeight: 'var(--font-weight-semibold)' }}>{f}</span>)}
           </div>
         </Alert>
       )}

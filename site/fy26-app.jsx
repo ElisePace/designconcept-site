@@ -9,7 +9,8 @@ function RevenueChart({ hover, setHover, onExplain }) {
   const x = (i) => padL + i * (bw + gap);
   const y = (v) => padT + plotH * (1 - v / max);
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', display: 'block' }} role="img" aria-label="FY26 revenue by quarter">
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', display: 'block' }} role="img"
+      aria-label={`FY26 revenue by quarter. ${REVENUE.map((q) => `${q.label} $${q.value.toFixed(2)} million${q.projected ? ', projected' : ''}`).join('; ')}. Q3 is down 12% quarter on quarter.`}>
       {[0, 3, 6, 9].map((g) => (
         <g key={g}>
           <line x1={padL} x2={W - 16} y1={y(g)} y2={y(g)} stroke="var(--color-border)" strokeWidth="1"></line>
