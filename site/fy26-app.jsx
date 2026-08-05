@@ -120,7 +120,7 @@ function App() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginTop: 16 }}>
-              <BI.KpiCard label="QoQ growth" value="−12.0%" delta="▼ vs Q2" deltaTone="negative" />
+              <BI.KpiCard label="QoQ growth" value="−12.0%" delta={corrected && quarter === 'Q3' ? 'reported −12.0% · adjusted −9%' : '▼ vs Q2'} deltaTone="negative" />
               <BI.KpiCard label="YoY growth" value="+6.2%" delta="▲ vs FY25" deltaTone="positive" />
               <BI.KpiCard label="Net retention" value="104%" delta="— flat" deltaTone="neutral" />
             </div>
