@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About this concept — Tomoro.ai context</title>
+<title>About this concept — Blue Insights</title>
 <link rel="stylesheet" href="_ds/blue-insights-design-system-2bb2cddb-564a-493e-8158-f3abd72f980c/styles.css">
 <style>
 *{box-sizing:border-box}
@@ -12,12 +12,7 @@ a{color:var(--color-primary);text-decoration:none}a:hover{color:var(--color-prim
 .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
 .eyebrow{font-size:var(--font-size-eyebrow);font-weight:var(--font-weight-semibold);letter-spacing:var(--letter-spacing-label);text-transform:uppercase;color:var(--color-text-muted)}
 h1{margin:6px 0 0;font-size:var(--font-size-display);font-weight:var(--font-weight-semibold);letter-spacing:var(--letter-spacing-display);line-height:var(--line-height-tight)}
-h2{margin:40px 0 12px;font-size:var(--font-size-h3);font-weight:var(--font-weight-semibold)}
-p,li{font-size:var(--font-size-body-lg);line-height:1.65;color:var(--color-text-secondary)}
-.card{margin-top:16px;padding:20px 24px;border:1px solid var(--color-border);border-radius:var(--radius-xl);background:var(--color-surface-1)}
-.card h3{margin:0 0 6px;font-size:var(--font-size-body-lg);font-weight:var(--font-weight-semibold);color:var(--color-text-primary)}
-.card p{margin:0;font-size:var(--font-size-body)}
-.pill{display:inline-block;padding:3px 10px;border-radius:var(--radius-pill);background:var(--color-primary-soft);color:var(--color-primary);font-size:var(--font-size-caption);font-weight:var(--font-weight-semibold);margin:0 6px 6px 0}
+p{font-size:var(--font-size-body-lg);line-height:1.65;color:var(--color-text-secondary)}
 .cta{display:inline-block;margin-top:24px;padding:10px 18px;border-radius:var(--radius-md);background:var(--color-primary);color:#fff !important;font-weight:var(--font-weight-semibold);font-size:var(--font-size-body)}
 .cta:hover{background:var(--color-primary-hover);text-decoration:none}
 .note{font-size:var(--font-size-caption);color:var(--color-text-muted)}
@@ -25,33 +20,18 @@ p,li{font-size:var(--font-size-body-lg);line-height:1.65;color:var(--color-text-
 </head>
 <body>
 <main class="wrap">
-  <span class="eyebrow">Design concept · context</span>
-  <h1>Blue Insights — designed for trustworthy AI at deployment scale</h1>
-  <p style="margin-top:14px">This page sits alongside the <a href="index.html">Blue Insights — FY26 Revenue prototype</a>. It captures the research context behind the concept and how it maps to the work of <strong>Tomoro.ai</strong>, the AI engineering firm OpenAI has agreed to acquire as the founding company of its "OpenAI Deployment Company" (announced May 2026, subject to regulatory approval).</p>
+  <span class="eyebrow">Design concept</span>
+  <h1>About this concept</h1>
+  <p style="margin-top:14px">Blue Insights is a working prototype I built to test a question: what does an AI research assistant need to show before a person in a regulated financial environment can defend its answer?</p>
 
-  <h2>Why this prototype speaks to that work</h2>
-  <div class="card">
-    <h3>Production-ready, not demo-ware</h3>
-    <p>The Research sidekick is designed around the realities of enterprise deployment: permissioned data sources, a restricted-access state with a request flow, and a share step that forces human review of sensitive figures before anything leaves the tool.</p>
-  </div>
-  <div class="card">
-    <h3>Explainability as the trust mechanism</h3>
-    <p>Every claim carries a citation, a "Why?" trace, and an explicit split into evidence / assumption / unknown. That is the interaction pattern enterprises need before they let an agent near board-level numbers.</p>
-  </div>
-  <div class="card">
-    <h3>Human-in-the-loop correction</h3>
-    <p>The user can challenge an assumption and the agent re-runs with the correction applied — a shared-goal loop ("an answer you can defend") rather than a one-shot answer box. Adoption depends on this feeling of joint work.</p>
-  </div>
-  <div class="card">
-    <h3>Systemised, deployable design</h3>
-    <p>The whole prototype runs on a tokenised design system (colour, type, spacing, AI-semantic states like accountability and transparency), so the pattern can be re-skinned and shipped inside a client's product quickly — the 12-week cadence Tomoro works to.</p>
-  </div>
+  <p>The dashboard is deliberately ordinary — revenue by quarter, a dip in Q3, an annotation inviting you to ask why. The interesting part is what happens when you do. The Research sidekick doesn't hand back a paragraph; it separates what it found into evidence, assumptions and unknowns, names the sources it was permitted to read, flags the one it wasn't, and grades its own confidence accordingly. When it can't confirm something, it says so and shows the request-access path instead of guessing.</p>
 
-  <h2>The concept in one line</h2>
-  <p>An analyst insight platform where the AI agent shows its working — evidence, assumptions and unknowns — so enterprise teams can defend the numbers it gives them.</p>
+  <p>The patterns I was experimenting with: shared goals between the person and the agent, working shown by default, data-permission boundaries treated as a first-class UI concern, checks you can save and re-run, and a human review step before anything is exported. None of the numbers are real — the data is invented for the demo. The design problems aren't.</p>
+
+  <p>Built by Elise Pace as a personal experiment in AI-enabled designer workflows. Everything here — interface, interaction model, microcopy — is my own work.</p>
 
   <a class="cta" href="index.html">Open the live prototype →</a>
-  <p class="note" style="margin-top:32px">Company details summarised from tomoro.ai (2026). This is an independent design concept, not affiliated with Tomoro.ai or OpenAI.</p>
+  <p class="note" style="margin-top:32px">A design concept by Elise Pace · <a href="https://elisepace.com" style="color:inherit;text-decoration:underline">elisepace.com</a></p>
 </main>
 </body>
 </html>
