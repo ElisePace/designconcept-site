@@ -133,6 +133,8 @@ function App() {
             <p style={{ margin: '16px 0 0', fontSize: 12, color: 'var(--color-text-muted)' }}>
               Q4 is projected · dashed bar. Click the Q3 annotation to ask the Research sidekick to show its working.
               <a href="about.html" style={{ marginLeft: 8, color: 'var(--color-text-muted)', textDecoration: 'underline', textDecorationColor: 'var(--color-border)', textUnderlineOffset: 3 }}>About this concept</a>
+              {' · '}
+              <a href="future.html" style={{ color: 'var(--color-text-muted)', textDecoration: 'underline', textDecorationColor: 'var(--color-border)', textUnderlineOffset: 3 }}>Future state</a>
             </p>
           </div>
         </main>
